@@ -1,0 +1,63 @@
+department,commodity_type,n_in_range,observed,expected,ratio,ci_lo,ci_hi,placebo_lo,placebo_hi
+Environment and Climate Change Canada,C,513,307,81.296,3.776,2.545,6.116,0.655,1.251
+Public Services and Procurement Canada,C,2033,1068,407.887,2.618,2.169,3.25,0.597,1.284
+Fisheries and Oceans Canada,C,1190,301,184.603,1.631,1.258,2.134,1.044,1.633
+National Defence,C,658,169,117.736,1.435,1.054,2.046,0.642,0.981
+Global Affairs Canada,C,427,128,99.646,1.285,0.919,1.935,1.114,1.9
+Correctional Service of Canada,C,514,235,185.364,1.268,0.906,1.887,0.803,5.11
+Parks Canada,C,319,100,87.194,1.147,0.769,1.914,0.871,3.275
+Royal Canadian Mounted Police,C,366,86,121.624,0.707,0.488,1.076,0.482,2.629
+Veterans Affairs Canada,G,340,120,33.502,3.582,2.392,6.567,0.7,2.746
+Courts Administration Service,G,319,106,39.507,2.683,1.78,4.468,0.504,1.691
+Employment and Social Development Canada,G,405,140,62.348,2.245,1.539,3.548,0.714,1.727
+Canada Border Services Agency,G,627,208,97.398,2.136,1.595,3.152,0.368,1.141
+Public Health Agency of Canada,G,2324,1129,546.518,2.066,1.753,2.506,0.488,1.638
+"Innovation, Science and Economic Development Canada",G,907,311,162.379,1.915,1.495,2.518,0.487,2.076
+National Research Council Canada,G,5726,1773,937.404,1.891,1.695,2.103,0.79,1.272
+Statistics Canada,G,432,152,83.518,1.82,1.32,2.842,0.766,2.956
+Indigenous Services Canada,G,937,397,218.893,1.814,1.439,2.373,0.684,1.286
+Agriculture and Agri-Food Canada,G,3543,997,555.025,1.796,1.56,2.081,1.032,1.528
+Department of Justice Canada,G,339,103,57.503,1.791,1.176,3.152,0.703,1.42
+Global Affairs Canada,G,4460,1428,812.058,1.758,1.569,1.986,1.03,2.129
+"Immigration, Refugees and Citizenship Canada",G,310,94,53.59,1.754,1.229,2.785,0.347,2.76
+Natural Resources Canada,G,2326,778,450.54,1.727,1.499,2.012,0.819,1.193
+Privy Council Office,G,424,158,97.172,1.626,1.156,2.429,0.411,1.24
+Public Services and Procurement Canada,G,2158,755,474.277,1.592,1.341,1.937,0.651,1.333
+Canada Revenue Agency,G,396,108,67.874,1.591,1.061,2.44,0.633,2.016
+Correctional Service of Canada,G,10404,2495,1599.139,1.56,1.446,1.678,0.661,1.179
+Environment and Climate Change Canada,G,2186,909,584.623,1.555,1.282,1.864,0.8,1.099
+Transport Canada,G,2858,854,599.496,1.425,1.239,1.657,0.618,1.853
+National Defence,G,21959,5361,3765.306,1.424,1.344,1.507,0.919,1.062
+Parks Canada,G,4618,1334,980.426,1.361,1.219,1.52,0.791,1.471
+Health Canada,G,1267,432,319.532,1.352,1.075,1.677,1.044,1.61
+Royal Canadian Mounted Police,G,5703,1822,1444.878,1.261,1.133,1.399,0.943,1.462
+Shared Services Canada,G,1948,581,493.174,1.178,0.996,1.397,0.949,1.29
+Canadian Food Inspection Agency,G,930,328,326.983,1.003,0.772,1.304,0.593,1.687
+Fisheries and Oceans Canada,G,8633,1728,3367.28,0.513,0.472,0.554,0.973,1.644
+Treasury Board of Canada Secretariat,S,340,244,31.812,7.67,4.043,18.195,0.486,0.939
+Crown-Indigenous Relations and Northern Affairs Canada,S,480,229,75.014,3.053,2.169,4.965,1.011,2.421
+Environment and Climate Change Canada,S,3356,1848,661.662,2.793,2.42,3.224,0.88,1.381
+Employment and Social Development Canada,S,1522,771,282.331,2.731,2.154,3.53,0.952,1.084
+Natural Resources Canada,S,2567,1398,528.001,2.648,2.214,3.134,0.837,1.579
+Health Canada,S,1371,701,275.94,2.54,2.026,3.211,0.536,2.495
+"Innovation, Science and Economic Development Canada",S,1213,647,256.113,2.526,1.957,3.314,0.833,1.416
+Transport Canada,S,1340,671,267.363,2.51,1.993,3.159,0.668,1.761
+Public Health Agency of Canada,S,486,231,96.799,2.386,1.624,3.858,0.921,1.134
+Department of Justice Canada,S,499,248,109.689,2.261,1.61,3.351,0.193,1.866
+Global Affairs Canada,S,3314,1425,670.196,2.126,1.877,2.492,0.926,1.195
+Shared Services Canada,S,1104,463,219.143,2.113,1.675,2.71,0.484,1.637
+Indigenous Services Canada,S,667,309,150.306,2.056,1.487,2.959,0.547,1.448
+Parks Canada,S,1449,517,288.924,1.789,1.467,2.235,0.765,1.285
+Canadian Food Inspection Agency,S,341,122,71.699,1.702,1.136,2.699,0.458,3.336
+Canada Revenue Agency,S,445,168,100.69,1.668,1.195,2.55,0.662,1.02
+Fisheries and Oceans Canada,S,3944,1280,819.086,1.563,1.386,1.765,0.79,0.965
+Canada Border Services Agency,S,362,158,105.794,1.493,1.001,2.427,0.489,2.079
+National Research Council Canada,S,1925,738,494.612,1.492,1.263,1.808,0.907,1.36
+Canadian Heritage,S,497,184,130.347,1.412,1.035,2.087,0.662,1.29
+Public Services and Procurement Canada,S,3359,1207,893.639,1.351,1.175,1.546,0.839,1.536
+Royal Canadian Mounted Police,S,1365,400,302.285,1.323,1.074,1.65,0.602,1.345
+"Immigration, Refugees and Citizenship Canada",S,361,134,110.787,1.21,0.804,1.891,0.736,1.841
+National Defence,S,3400,1036,885.997,1.169,1.03,1.334,0.815,1.133
+Agriculture and Agri-Food Canada,S,785,226,210.706,1.073,0.818,1.405,0.442,1.396
+Correctional Service of Canada,S,1354,432,404.079,1.069,0.868,1.33,0.885,1.633
+Immigration and Refugee Board of Canada,S,657,152,154.386,0.985,0.293,1.681,0.648,3.766

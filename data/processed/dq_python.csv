@@ -1,0 +1,27 @@
+check_name,value
+rows in portal file,1336184
+"reference numbers with a non-ASCII hyphen, replaced",331
+contract_value: blank in file,348
+"contract_value: present but not a number, set to null",0
+original_value: blank in file,301229
+"original_value: present but not a number, set to null",0
+amendment_value: blank in file,433433
+"amendment_value: present but not a number, set to null",0
+"contract_date: not a valid date, set to null",0
+"contract_period_start: not a valid date, set to null",0
+"delivery_date: not a valid date, set to null",0
+dropped: no contract date,0
+dropped: contract date before 2017-04-01 (outside load window),532899
+dropped: contract date after today,2
+dropped: no total contract value,10
+"dropped: duplicate (owner_org, reference_number), later copy",0
+"reporting_period not in YYYY-YYYY-Qn form, set to null",2128
+rows whose vendor name cleaned to nothing (no vendor_id),0
+distinct raw vendor spellings,133347
+distinct names after the rule-based pass,94854
+names merged by removing spaces,1392
+names merged by fuzzy matching,5938
+distinct vendors after both passes,87524
+rows written to contract_reports.csv,803273
+merged names checked by hand,100
+merged names judged the same vendor,95

@@ -1,0 +1,14 @@
+test_id,parameter,value,n_flagged,awarded_value_flagged,is_base
+T1,split_window_days,15.0,9675,209905245.13,False
+T1,split_window_days,30.0,13424,289631255.36,True
+T1,split_window_days,60.0,18050,388438972.39,False
+T1,split_window_days,90.0,21049,451905137.32,False
+T2,near_limit_band,0.05,15327,535311811.18,False
+T2,near_limit_band,0.1,20231,682913630.14,True
+T2,near_limit_band,0.2,29320,936986762.12,False
+T3,amendment_growth_flag,0.25,32417,35978499888.97,False
+T3,amendment_growth_flag,0.5,26659,25111190260.39,True
+T3,amendment_growth_flag,1.0,18584,19813784299.38,False
+T4,duplicate_window_days,3.0,8264,844074499.38,False
+T4,duplicate_window_days,7.0,9597,1003781924.6,True
+T4,duplicate_window_days,14.0,10993,1117296102.71,False

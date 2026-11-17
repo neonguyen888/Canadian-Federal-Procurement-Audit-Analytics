@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+.DS_Store
+
+# The raw download is 650+ MB and the cleaned tables are rebuilt from it by the pipeline.
+# fetch_data.py gets the file again from open.canada.ca. The small outputs in data/processed
+# (results, checks, the vendor review sample) are kept so the report's numbers can be traced.
+data/raw/*.csv
+data/processed/contract_reports.csv
+data/processed/vendors.csv
+data/processed/vendor_aliases.csv
+data/tableau/awards.csv

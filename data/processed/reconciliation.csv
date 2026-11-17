@@ -1,0 +1,18 @@
+check,sql_value,python_value,match
+T1: awards flagged,13424.0,13424.0,True
+T1: awarded value flagged,289631255.36,289631255.36,True
+T1: flagged by one side only,0.0,0.0,True
+T2: awards flagged,20231.0,20231.0,True
+T2: awarded value flagged,682913630.14,682913630.14,True
+T2: flagged by one side only,0.0,0.0,True
+T3: awards flagged,26659.0,26659.0,True
+T3: awarded value flagged,25111190260.39,25111190260.39,True
+T3: flagged by one side only,0.0,0.0,True
+T4: awards flagged,9597.0,9597.0,True
+T4: awarded value flagged,1003781924.6,1003781924.6,True
+T4: flagged by one side only,0.0,0.0,True
+T5: awards flagged,19.0,19.0,True
+T5: awarded value flagged,302267100.26,302267100.26,True
+T5: flagged by one side only,0.0,0.0,True
+risk score: largest difference,0.0,0.0,True
+review queue: top 100 in common,100.0,100.0,True
