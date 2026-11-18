@@ -83,6 +83,27 @@ def test_an_untraceable_number_is_reported():
     assert untraceable("We found 12,345,678 awards in 2024-25, see SOR/87-402 and 17 November 2026.", {"9"}) == {"12,345,678"}
 
 
+def stated_dates() -> set[str]:
+    """The data date each document gives, as YYYY-MM-DD."""
+    from datetime import datetime
+    found = set()
+    for doc in DOCS:
+        m = re.search(r"(?:Data as of:\*\* |last modified on the portal on )(\d{1,2} \w+ \d{4})", doc.read_text())
+        assert m, f"{doc.name} does not say which data file it describes"
+        found.add(datetime.strptime(m.group(1), "%d %B %Y").date().isoformat())
+    return found
+
+
+def run_date() -> str:
+    import json
+    return json.loads((ROOT / "data" / "processed" / "results.json").read_text())["source"]["portal_last_modified"][:10]
+
+
+def test_the_documents_describe_the_file_this_run_used():
+    # update_docs.py moves the date on with the numbers after each run on a newer file
+    assert stated_dates() == {run_date()}
+
+
 @pytest.mark.parametrize("doc", DOCS, ids=lambda p: p.name)
 def test_every_number_in_the_documents_comes_from_a_run(doc):
     assert untraceable(doc.read_text(), known_numbers()) == set()

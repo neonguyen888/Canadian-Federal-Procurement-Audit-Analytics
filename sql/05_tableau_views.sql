@@ -5,7 +5,7 @@
 -- What the Tableau dashboard reads: one row per award in the analysis window, with its flags and
 -- risk score, in plain labels a dashboard can show as they are. src/export_tableau.py writes it to
 -- data/tableau/awards.csv, because Tableau Public reads files, not databases.
--- Vendor names are left out of the public version. Each vendor gets a stable code instead, so the
+-- Vendor names are left out of the public version. Each vendor gets a code instead, so the
 -- dashboard can still show that several awards went to the same supplier.
 -- =============================================================================================
 

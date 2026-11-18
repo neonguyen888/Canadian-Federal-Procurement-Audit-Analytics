@@ -12,3 +12,8 @@ data/processed/contract_reports.csv
 data/processed/vendors.csv
 data/processed/vendor_aliases.csv
 data/tableau/awards.csv
+
+# Tableau writes these while a workbook is open
+tableau/.~*.twbr
+# images and the clip made for posting, kept on this machine only
+linkedin/

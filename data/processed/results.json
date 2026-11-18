@@ -4,10 +4,10 @@
     "dataset_url": "https://open.canada.ca/data/en/dataset/d8f85d91-7dec-4fd1-8055-483b77225d8b",
     "resource_url": "https://open.canada.ca/data/dataset/d8f85d91-7dec-4fd1-8055-483b77225d8b/resource/fac950c0-00d5-4ec1-a4d3-9cbebf98a305/download/contracts.csv",
     "schema_url": "https://open.canada.ca/data/recombinant-published-schema/contracts.json",
-    "portal_last_modified": "2026-11-17T06:54:42.822349",
-    "size_bytes": 655508816,
-    "downloaded_at_utc": "2026-11-17T13:06:27+00:00",
-    "n_rows": 1336184,
+    "portal_last_modified": "2026-11-18T06:55:09.209921",
+    "size_bytes": 655472409,
+    "downloaded_at_utc": "2026-11-18T14:28:08+00:00",
+    "n_rows": 1336111,
     "n_columns": 43,
     "licence": "Open Government Licence - Canada, https://open.canada.ca/en/open-government-licence-canada"
   },
@@ -41,13 +41,13 @@
     ]
   },
   "cleaning": {
-    "rows in portal file": 1336184,
+    "rows in portal file": 1336111,
     "reference numbers with a non-ASCII hyphen, replaced": 331,
     "contract_value: blank in file": 348,
     "contract_value: present but not a number, set to null": 0,
     "original_value: blank in file": 301229,
     "original_value: present but not a number, set to null": 0,
-    "amendment_value: blank in file": 433433,
+    "amendment_value: blank in file": 433370,
     "amendment_value: present but not a number, set to null": 0,
     "contract_date: not a valid date, set to null": 0,
     "contract_period_start: not a valid date, set to null": 0,
@@ -64,12 +64,12 @@
     "names merged by removing spaces": 1392,
     "names merged by fuzzy matching": 5938,
     "distinct vendors after both passes": 87524,
-    "rows written to contract_reports.csv": 803273,
+    "rows written to contract_reports.csv": 803200,
     "merged names checked by hand": 100,
     "merged names judged the same vendor": 95
   },
   "database": {
-    "n_report_rows": 803273,
+    "n_report_rows": 803200,
     "n_contracts": 568847,
     "n_vendors_all": 87524,
     "n_departments_all": 97
@@ -78,12 +78,12 @@
     "n_awards": 427302,
     "n_departments": 95,
     "n_vendors": 67776,
-    "awarded_value": 156109748906.66,
-    "current_value": 192263191431.7,
+    "awarded_value": 156110366105.49,
+    "current_value": 192263811318.53,
     "first_award": "2019-06-10T00:00:00.000",
     "last_award": "2026-10-27T00:00:00.000",
     "pct_non_competitive": 36.5586868304,
-    "n_amended": 54351
+    "n_amended": 54353
   },
   "by_fiscal_year": [
     {
@@ -135,10 +135,10 @@
       "fiscal_year": "2024-2025",
       "n_awards": 58192,
       "awarded_value": 43458811887.16,
-      "current_value": 48679926340.11,
+      "current_value": 48679929028.11,
       "n_non_competitive": 22739,
       "pct_non_competitive": 39.1,
-      "n_amended": 7160
+      "n_amended": 7161
     },
     {
       "fiscal_year": "2025-2026",
@@ -147,13 +147,13 @@
       "current_value": 16851537192.92,
       "n_non_competitive": 23192,
       "pct_non_competitive": 37.0,
-      "n_amended": 6536
+      "n_amended": 6537
     },
     {
       "fiscal_year": "2026-2027",
       "n_awards": 34119,
-      "awarded_value": 11283730110.95,
-      "current_value": 11385736374.29,
+      "awarded_value": 11284347309.78,
+      "current_value": 11386353573.12,
       "n_non_competitive": 10767,
       "pct_non_competitive": 31.6,
       "n_amended": 2128
@@ -165,17 +165,17 @@
     "info": {
       "award rows with contract_value under $10,000": 1944,
       "award rows with contract_value zero or negative": 265,
-      "award rows where total <> original + amendment (by over $1)": 16759,
+      "award rows where total <> original + amendment (by over $1)": 16758,
       "amendment rows with no award row in the load window": 43235,
       "rows with no procurement_id (cannot be chained to amendments)": 37,
       "rows with no instrument_type": 2135,
       "award rows with no commodity_type (no s.6(b) limit can be applied)": 94,
       "award rows with no solicitation_procedure": 422,
-      "award rows with no number_of_bids": 321707,
-      "non-competitive awards with no s.6 exception recorded": 122222,
+      "award rows with no number_of_bids": 321635,
+      "non-competitive awards with no s.6 exception recorded": 122207,
       "rows where delivery_date is before contract_date": 5332,
       "rows with a malformed reporting_period (set to null)": 2128,
-      "procurement ids with more than one award (C) row": 2183,
+      "procurement ids with more than one award (C) row": 2108,
       "contracts whose rows disagree on the solicitation procedure": 4217,
       "SOSA rows with a non-zero contract_value": 62347,
       "rows with no vendor_id (name cleaned to nothing)": 0

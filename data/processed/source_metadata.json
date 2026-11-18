@@ -3,10 +3,10 @@
   "dataset_url": "https://open.canada.ca/data/en/dataset/d8f85d91-7dec-4fd1-8055-483b77225d8b",
   "resource_url": "https://open.canada.ca/data/dataset/d8f85d91-7dec-4fd1-8055-483b77225d8b/resource/fac950c0-00d5-4ec1-a4d3-9cbebf98a305/download/contracts.csv",
   "schema_url": "https://open.canada.ca/data/recombinant-published-schema/contracts.json",
-  "portal_last_modified": "2026-11-17T06:54:42.822349",
-  "size_bytes": 655508816,
-  "downloaded_at_utc": "2026-11-17T13:06:27+00:00",
-  "n_rows": 1336184,
+  "portal_last_modified": "2026-11-18T06:55:09.209921",
+  "size_bytes": 655472409,
+  "downloaded_at_utc": "2026-11-18T14:28:08+00:00",
+  "n_rows": 1336111,
   "n_columns": 43,
   "licence": "Open Government Licence - Canada, https://open.canada.ca/en/open-government-licence-canada"
 }

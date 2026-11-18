@@ -2,8 +2,8 @@
 # Author: Neo Nguyen
 # Rebuild everything from scratch, in order:
 #   download + header check -> clean + vendor keys -> PostgreSQL tables, tests, scores and checks
-#   -> SQL vs pandas reconciliation -> bunching -> sensitivity -> case study -> results file -> charts
-#   -> files for the Tableau dashboard -> tests
+#   -> SQL vs pandas reconciliation -> bunching -> sensitivity -> case study -> results file
+#   -> numbers in README and report brought up to date -> charts -> Tableau files and workbook -> tests
 # PostgreSQL itself must already be running (Postgres.app on a Mac); src/run_sql.py creates the database.
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -16,7 +16,8 @@ PACKAGES=("pandas>=2.2" "pyarrow>=15.0" "psycopg[binary]>=3.2" "requests>=2.31" 
 
 PY="$(pwd)/.venv/bin/python"
 (cd src && "$PY" fetch_data.py && "$PY" clean.py && "$PY" run_sql.py && "$PY" reconcile.py \
-        && "$PY" bunching.py && "$PY" sensitivity.py && "$PY" case_study.py && "$PY" results.py && "$PY" charts.py \
-        && "$PY" export_tableau.py)
+        && "$PY" bunching.py && "$PY" sensitivity.py && "$PY" case_study.py && "$PY" results.py \
+        && "$PY" update_docs.py && "$PY" charts.py \
+        && "$PY" export_tableau.py && "$PY" ../tableau/build_workbook.py)
 "$PY" -m pytest -q tests
 rm -rf src/__pycache__ tests/__pycache__ .pytest_cache

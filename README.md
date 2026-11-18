@@ -59,22 +59,27 @@ All 12 charts are in the [full report](reports/report.md).
 
 ## Dashboard
 
-Design for a three-page Tableau Public dashboard: an overview, the pile-up under the $40,000 limit, and the review queue. [`tableau/mockup.py`](tableau/mockup.py) draws it from the project data, so it shows the real numbers, and [`tableau/README.md`](tableau/README.md) sets out each sheet's fields, filters and colours.
+A three-page Tableau dashboard on the same run: an overview, the pile-up under the $40,000 limit, and the review queue, where a click on an award shows why it was flagged. [`tableau/procurement_review.twb`](tableau/procurement_review.twb) opens in Tableau Desktop or Tableau Public once the pipeline has written the data files. The pipeline writes the workbook too, so the figures in its text follow the data; [`tableau/README.md`](tableau/README.md) covers opening, publishing and how it is built.
 
-![Dashboard design, overview page](tableau/design/1_overview_dark.png)
+![Dashboard, overview page](tableau/screenshots/1_overview.png)
+
+| | |
+|---|---|
+| ![Limits page](tableau/screenshots/2_limits.png) | ![Queue page](tableau/screenshots/3_queue.png) |
+| Awards per $1,000 against the trend, and each department against its own range | The highest-scoring awards, with the reasons for the selected one |
 
 ## Data and sources
 
 | Source | Used for |
 |---|---|
-| [Proactive Publication: Contracts over $10,000](https://open.canada.ca/data/en/dataset/d8f85d91-7dec-4fd1-8055-483b77225d8b), Government of Canada | The contract data: one CSV of 1,336,184 rows and 43 columns, last modified on the portal on 17 November 2026 |
+| [Proactive Publication: Contracts over $10,000](https://open.canada.ca/data/en/dataset/d8f85d91-7dec-4fd1-8055-483b77225d8b), Government of Canada | The contract data: one CSV of 1,336,111 rows and 43 columns, last modified on the portal on 18 November 2026 |
 | [Data dictionary](https://open.canada.ca/data/recombinant-published-schema/contracts.json) for that file | Column definitions and code lists; the pipeline checks the CSV header against it |
 | [Contract search](https://search.open.canada.ca/contracts/) on open.canada.ca | Looking up a single contract by hand |
 | [Government Contracts Regulations, section 6](https://laws-lois.justice.gc.ca/eng/regulations/SOR-87-402/section-6.html) | The $25,000 and $40,000 limits, in force since 10 June 2019 |
 | Auditor General of Canada, [2024 Report 1: ArriveCAN](https://www.oag-bvg.gc.ca/internet/English/att__e_44429.html) ([PDF](https://open.canada.ca/data/en/info/2a492f50-15c0-4ced-91b9-3260e85e1f7a)) | The case study in report section 10 |
 | CBSA, [briefing to the Public Accounts committee on ArriveCAN](https://www.cbsa-asfc.gc.ca/transparency-transparence/pd-dp/bbp-rpp/pacp/2024-05-14/overview-apercu-eng.html) | Which firms the case study includes |
 
-Each run records the portal's last-modified stamp, the file size and the row count, and checks the CSV header against the data dictionary before anything else runs. The 656 MB file is not in this repository; the pipeline downloads it.
+Each run records the portal's last-modified stamp, the file size and the row count, and checks the CSV header against the data dictionary before anything else runs. The 655 MB file is not in this repository; the pipeline downloads it.
 
 ## Run the pipeline
 
@@ -84,7 +89,9 @@ The script is for macOS or Linux. You need Python 3 (tested on 3.15) and Postgre
 ./run_pipeline.sh
 ```
 
-The script creates `.venv` on first run and installs the libraries listed at its top (pandas, pyarrow, psycopg, requests, rapidfuzz, matplotlib, pytest). Then it downloads the data and checks its header, cleans it and merges vendor spellings, rebuilds the PostgreSQL schema with the five tests, the risk score and 18 blocking checks in one transaction, reconciles SQL against pandas, runs the bunching, sensitivity and case-study analyses, writes every reported number to `data/processed/results.json`, redraws the charts, writes the files the Tableau dashboard reads and runs the unit tests. A full run takes under two minutes once the file is downloaded.
+The script creates `.venv` on first run and installs the libraries listed at its top (pandas, pyarrow, psycopg, requests, rapidfuzz, matplotlib, pytest). Then it downloads the data and checks its header, cleans it and merges vendor spellings, rebuilds the PostgreSQL schema with the five tests, the risk score and 18 blocking checks in one transaction, reconciles SQL against pandas, runs the bunching, sensitivity and case-study analyses, writes every reported number to `data/processed/results.json`, brings the numbers in this README and the report up to date, redraws the charts, writes the Tableau workbook and the files it reads, and runs the unit tests. A full run takes under two minutes once the file is downloaded.
+
+The portal replaces the file most days, so each run fetches the newest one in place of the last. `src/update_docs.py` then compares the new results with the previous run's and rewrites each figure that moved, along with the data date. A figure it cannot place with certainty is named in the output, and the document test fails until it is fixed.
 
 ## Project layout
 
@@ -102,6 +109,7 @@ src/
   sensitivity.py   flag counts as each cut-off moves
   case_study.py    the ArriveCAN contractors against two baselines
   results.py       every number the report quotes, in one JSON file
+  update_docs.py   moves the figures in README.md and report.md on to the latest run
   charts.py        report figures
   export_tableau.py  the files the Tableau dashboard reads, with no vendor names
 sql/
@@ -110,9 +118,9 @@ sql/
   03_audit_tests.sql  the five tests, the flags table and the risk score
   04_checks.sql       18 blocking checks and 16 descriptive ones
   05_tableau_views.sql  one row per award, as the dashboard shows it
-tableau/           dashboard design (design/), the script that draws it, and the build guide (README.md)
+tableau/           the dashboard workbook, the script that writes it, screenshots and a short guide (README.md)
 tests/             cleaning, vendor matching, contract assembly (on a test database), the five tests, bunching,
-                   case study, settings, the Tableau files, documents
+                   case study, settings, the Tableau files and workbook, documents and their updates
 data/raw/          the portal file (downloaded, not committed) and its data dictionary
 data/processed/    analysis outputs and results.json; the large cleaned tables are rebuilt, not committed
 data/tableau/      files for the dashboard; awards.csv (77 MB) is rebuilt, not committed

@@ -1,11 +1,11 @@
 check_name,value
-rows in portal file,1336184
+rows in portal file,1336111
 "reference numbers with a non-ASCII hyphen, replaced",331
 contract_value: blank in file,348
 "contract_value: present but not a number, set to null",0
 original_value: blank in file,301229
 "original_value: present but not a number, set to null",0
-amendment_value: blank in file,433433
+amendment_value: blank in file,433370
 "amendment_value: present but not a number, set to null",0
 "contract_date: not a valid date, set to null",0
 "contract_period_start: not a valid date, set to null",0
@@ -22,6 +22,6 @@ distinct names after the rule-based pass,94854
 names merged by removing spaces,1392
 names merged by fuzzy matching,5938
 distinct vendors after both passes,87524
-rows written to contract_reports.csv,803273
+rows written to contract_reports.csv,803200
 merged names checked by hand,100
 merged names judged the same vendor,95

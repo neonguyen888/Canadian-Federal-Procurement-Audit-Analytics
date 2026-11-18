@@ -1,6 +1,6 @@
 # Canadian federal procurement: which contracts to review first
 
-**Author:** Neo Nguyen · **Data as of:** 17 November 2026 (portal file last modified and downloaded that day) · **Tools:** PostgreSQL, Python, matplotlib
+**Author:** Neo Nguyen · **Data as of:** 18 November 2026 (portal file last modified and downloaded that day) · **Tools:** PostgreSQL, Python, matplotlib
 
 ## Summary
 
@@ -44,16 +44,16 @@ The source is the Government of Canada's [Proactive Publication of Contracts ove
 
 | Item | Value |
 |---|---|
-| File | [`contracts.csv`](https://open.canada.ca/data/en/dataset/d8f85d91-7dec-4fd1-8055-483b77225d8b/resource/fac950c0-00d5-4ec1-a4d3-9cbebf98a305), 656 MB, 43 columns |
+| File | [`contracts.csv`](https://open.canada.ca/data/en/dataset/d8f85d91-7dec-4fd1-8055-483b77225d8b/resource/fac950c0-00d5-4ec1-a4d3-9cbebf98a305), 655 MB, 43 columns |
 | Column definitions | [Published data dictionary](https://open.canada.ca/data/recombinant-published-schema/contracts.json) |
-| Rows | 1,336,184, going back to the 1990s |
-| Vintage | Portal file last modified 17 November 2026 |
+| Rows | 1,336,111, going back to the 1990s |
+| Vintage | Portal file last modified 18 November 2026 |
 | One row is | One reported transaction: an award (C), an amendment (A) or a standing offer agreement (SOSA) |
 | Licence | [Open Government Licence, Canada](https://open.canada.ca/en/open-government-licence-canada) |
 
 Two choices about dates shape everything after this.
 
-I loaded rows with a contract date from April 2017 on, which is 803,273 rows. Before that, the column that says whether a row is an award or an amendment is often empty: it is blank in 27% of fiscal 2016-17 rows and in more than half of the year before. The tests cannot work without it.
+I loaded rows with a contract date from April 2017 on, which is 803,200 rows. Before that, the column that says whether a row is an award or an amendment is often empty: it is blank in 27% of fiscal 2016-17 rows and in more than half of the year before. The tests cannot work without it.
 
 I analysed awards from 10 June 2019 on. That is the day the $25,000 and $40,000 limits came into force. Before it, section 6 set [a $25,000 limit for goods and services alike](https://laws-lois.justice.gc.ca/eng/regulations/SOR-87-402/section-6-20060322.html), a wording last amended in 1996, so a test built around $40,000 has nothing to say about earlier awards. Section 6 has not been amended since June 2019. The two years of earlier rows stay in the database so that an amendment filed in 2019 can still find the award it belongs to.
 
@@ -76,28 +76,28 @@ Ninety-nine organisations type this data by hand, and it shows. The cleaning scr
 | Dropped: no total contract value | 10 |
 | Dropped: contract date in the future | 2 |
 | Reporting period not in the standard form, set to blank | 2,128 |
-| Rows kept | 803,273 |
+| Rows kept | 803,200 |
 
 The 331 reference numbers are worth a sentence. They contain a character that looks exactly like a hyphen on screen and is a different character underneath, so an amendment written that way would never match its award. I noticed it while reading one contract's long chain of amendments, where two reference numbers were typed with a different hyphen from the rest.
 
-After loading, 18 checks have to pass or the whole database rebuild is rolled back: keys are unique, every contract has an award row behind it, every flag points at a real award, and so on. All 18 pass. A further 16 checks do not block anything. They describe how departments report, and a reader should know them before trusting any test. These counts cover all 803,273 loaded rows, from April 2017.
+After loading, 18 checks have to pass or the whole database rebuild is rolled back: keys are unique, every contract has an award row behind it, every flag points at a real award, and so on. All 18 pass. A further 16 checks do not block anything. They describe how departments report, and a reader should know them before trusting any test. These counts cover all 803,200 loaded rows, from April 2017.
 
 | What the data looks like | Count |
 |---|---|
-| Award rows with no number of bids | 321,707 |
-| Non-competitive award rows with no s.6 exception recorded | 122,222 |
+| Award rows with no number of bids | 321,635 |
+| Non-competitive award rows with no s.6 exception recorded | 122,207 |
 | Amendments whose award is outside the loaded period | 43,235 |
-| Award rows where total differs from original plus amendment by over $1 | 16,759 |
+| Award rows where total differs from original plus amendment by over $1 | 16,758 |
 | Rows where the delivery date is before the contract date | 5,332 |
 | Contracts whose rows disagree on how the contract was procured | 4,217 |
-| Procurement numbers reported as a new award more than once | 2,183 |
+| Procurement numbers reported as a new award more than once | 2,108 |
 | Award rows under $10,000 in a file of contracts over $10,000 | 1,944 |
 | Award rows with no solicitation procedure | 422 |
 | Award rows with no commodity type, so no limit can be applied | 94 |
 
 Two of these deserve a closer look.
 
-The s.6 exception is the reason a department gives for not soliciting bids. The [data dictionary](https://open.canada.ca/data/recombinant-published-schema/contracts.json) marks the field as optional, and the early years show it: inside the analysis window it is blank for 98.3% of non-competitive awards in fiscal 2019-20, falling to 41.7% in 2022-23 and 36.6% in 2025-26. Most of the early blanks give a limited-tendering reason instead (13,205 of 15,513 in 2019-20). So the 122,222 is mostly a field that was not collected, not 122,222 omissions. Since 2022-23 it has stayed between about 37% and 42%.
+The s.6 exception is the reason a department gives for not soliciting bids. The [data dictionary](https://open.canada.ca/data/recombinant-published-schema/contracts.json) marks the field as optional, and the early years show it: inside the analysis window it is blank for 98.3% of non-competitive awards in fiscal 2019-20, falling to 41.7% in 2022-23 and 36.6% in 2025-26. Most of the early blanks give a limited-tendering reason instead (13,205 of 15,513 in 2019-20). So the 122,207 is mostly a field that was not collected, not 122,207 omissions. Since 2022-23 it has stayed between about 37% and 42%.
 
 In 4,217 contracts the award row and the amendment rows give different solicitation procedures. The tests read the award row only. Section 10 shows one case where that matters.
 
@@ -171,7 +171,7 @@ Department by department, 27 departments have enough service awards near the lim
 
 ## 6. Amendments
 
-A contract can start small and grow. 54,351 of the awards analysed have at least one amendment, and T3 flags 26,659 that grew by more than half or were amended three times or more.
+A contract can start small and grow. 54,353 of the awards analysed have at least one amendment, and T3 flags 26,659 that grew by more than half or were amended three times or more.
 
 ![Value at award against value now](figures/07_amendment_growth.png)
 

@@ -158,6 +158,8 @@ def main():
         },
         "review_queue_top_10": records(queue),
     }
+    if (P / "results.json").exists():          # update_docs.py compares the two runs, then deletes this copy
+        (P / "results.json").replace(P / "results_previous.json")
     (P / "results.json").write_text(json.dumps(results, indent=2))
     print(json.dumps({k: results[k] for k in ("database", "window", "flagged", "reconciliation")}, indent=2))
 

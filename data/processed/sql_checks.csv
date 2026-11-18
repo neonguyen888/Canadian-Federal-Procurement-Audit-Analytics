@@ -19,17 +19,17 @@ risk_scores: every score is between 0 and 100,hard,0,0,True
 risk_scores: scored awards = flagged awards,hard,64948,64948,True
 "award rows with contract_value under $10,000",info,1944,0,False
 award rows with contract_value zero or negative,info,265,0,False
-award rows where total <> original + amendment (by over $1),info,16759,0,False
+award rows where total <> original + amendment (by over $1),info,16758,0,False
 amendment rows with no award row in the load window,info,43235,0,False
 rows with no procurement_id (cannot be chained to amendments),info,37,0,False
 rows with no instrument_type,info,2135,0,False
 award rows with no commodity_type (no s.6(b) limit can be applied),info,94,0,False
 award rows with no solicitation_procedure,info,422,0,False
-award rows with no number_of_bids,info,321707,0,False
-non-competitive awards with no s.6 exception recorded,info,122222,0,False
+award rows with no number_of_bids,info,321635,0,False
+non-competitive awards with no s.6 exception recorded,info,122207,0,False
 rows where delivery_date is before contract_date,info,5332,0,False
 rows with a malformed reporting_period (set to null),info,2128,0,False
-procurement ids with more than one award (C) row,info,2183,0,False
+procurement ids with more than one award (C) row,info,2108,0,False
 contracts whose rows disagree on the solicitation procedure,info,4217,0,False
 SOSA rows with a non-zero contract_value,info,62347,0,False
 rows with no vendor_id (name cleaned to nothing),info,0,0,True
