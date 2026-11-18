@@ -2,13 +2,24 @@
 
 **Author:** Neo Nguyen · **Stack:** PostgreSQL · Python (pandas, rapidfuzz, matplotlib) · Tableau
 
-A Canadian federal department can give a service contract worth up to $40,000 to a supplier of its choice, without asking anyone else to bid. Above that, the work has to be competed. So the contracts sitting just under $40,000 are worth a look, and there are a lot of them: 18,990 in the last $5,000 before the limit, about twice the 9,900 that the values below would predict. Two thirds of them were sole-sourced.
-
-The government publishes every contract over $10,000, about 60,000 a year, far more than an audit team can read. This project turns that list into a short one. It loads seven years of awards into PostgreSQL, runs five checks for the patterns auditors look for, such as one purchase split into several small contracts or a contract that doubles after it is signed, and ranks what they flag so a reviewer knows which files to open first.
-
-**[Read the full report with charts](reports/report.md)**
+Canadian federal departments can give a service contract worth up to $40,000 to the supplier of their choice without asking anyone else to bid. One dollar more and the work has to be competed. Count the contracts at each value and that line is easy to find:
 
 ![Service awards by value, with the trend](reports/figures/02_services_under_limit.png)
+
+In the last $5,000 before $40,000 there are 18,990 service awards, about twice the 9,900 that the values below would predict, and two thirds of them were sole-sourced. Further up, at round numbers where no rule changes, the same count finds no pile-up of that size.
+
+## What this project does
+
+The government publishes every contract over $10,000, about 60,000 a year, and no audit team can read them all. This project loads seven years of them into PostgreSQL, runs five checks for patterns an auditor would want to see (one purchase split into several small contracts, a sole-source award priced just under the limit, a contract that keeps growing after it is signed), scores what they flag, and puts the awards in the order a reviewer should open them.
+
+What it found:
+
+- Service contracts pile up just under the $40,000 limit, and the extra ones are mostly sole-sourced: 2.63x the trend for sole-sourced awards, against 1.25x for competed ones.
+- 2,071 awards were sole-sourced within the limit and later amended past it. They were worth $55.3M when signed and are worth $165.7M now.
+- 64,948 awards (15.2%) are flagged. The ones at the top of the queue look alike: sole-sourced just under the limit, part of a run of awards to the same vendor, then amended well past it.
+- Run against ArriveCAN, whose contracts the Auditor General later examined, the checks did not single out its contractors overall, but they flagged their same-value contracts issued days apart four times as often.
+
+The [full report](reports/report.md) has the method, the limits of the analysis and all 12 charts. The [Tableau dashboard](tableau/README.md) lets you filter by year, department and type of purchase, and click an award to see why it was flagged.
 
 ## Questions
 
@@ -18,7 +29,7 @@ The government publishes every contract over $10,000, about 60,000 a year, far m
 
 ## Results
 
-| What I found | Number |
+| Measure | Result |
 |---|---|
 | Awards analysed | 427,302 from 95 departments, 10 June 2019 to October 2026 |
 | Their value | $156.1B when signed, $192.3B after amendments |
