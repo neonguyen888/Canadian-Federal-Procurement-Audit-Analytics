@@ -83,15 +83,20 @@ Each run records the portal's last-modified stamp, the file size and the row cou
 
 ## Run the pipeline
 
-The script is for macOS or Linux. You need Python 3 (tested on 3.15) and PostgreSQL 14 or later running on `localhost:5432`. On a Mac the simplest way to get PostgreSQL is [Postgres.app](https://postgresapp.com). The pipeline creates the `procurement_audit` database and a `procurement` schema by itself. To use another server, set `PROCUREMENT_PG_DSN`, for example `host=localhost dbname=procurement_audit user=me password=...`.
+You need macOS or Linux, Python 3 and PostgreSQL 14 or later on `localhost:5432` ([Postgres.app](https://postgresapp.com) on a Mac). For another server, set `PROCUREMENT_PG_DSN`. The first run installs its libraries into `.venv`.
 
 ```bash
 ./run_pipeline.sh
 ```
 
-The script creates `.venv` on first run and installs the libraries listed at its top (pandas, pyarrow, psycopg, requests, rapidfuzz, matplotlib, pytest). Then it downloads the data and checks its header, cleans it and merges vendor spellings, rebuilds the PostgreSQL schema with the five tests, the risk score and 18 blocking checks in one transaction, reconciles SQL against pandas, runs the bunching, sensitivity and case-study analyses, writes every reported number to `data/processed/results.json`, brings the numbers in this README and the report up to date, redraws the charts, writes the Tableau workbook and the files it reads, and runs the unit tests. A full run takes under two minutes once the file is downloaded.
+One command rebuilds everything, in under two minutes once the file is downloaded:
 
-The portal replaces the file most days, so each run fetches the newest one in place of the last. `src/update_docs.py` then compares the new results with the previous run's and rewrites each figure that moved, along with the data date. A figure it cannot place with certainty is named in the output, and the document test fails until it is fixed.
+1. Downloads the newest file from the portal and checks its header.
+2. Cleans it and merges vendor spellings.
+3. Builds the database, the five tests and the risk score, behind 18 blocking checks.
+4. Checks SQL against pandas, then runs the bunching, sensitivity and case-study analyses.
+5. Updates every figure in this README and the report, redraws the charts and rebuilds the Tableau workbook.
+6. Runs the unit tests.
 
 ## Project layout
 
