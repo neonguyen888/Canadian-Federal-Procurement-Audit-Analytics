@@ -120,10 +120,10 @@ A floating container, hidden by default, shown by the rail's Method button. Keep
 - Window: awards from 10 June 2019, when the $25,000 and $40,000 limits of the Government Contracts Regulations s.6(b) came into force.
 - Five tests, each written twice (SQL and pandas) and compared award by award: `<Checks Matching>` of `<Checks Total>` checks agree.
 - A flag marks an award for review. It is not a finding of wrongdoing.
-- Full method and limits: link to `reports/report.md` on GitHub.
+- Full method and limits: [the report on GitHub](https://github.com/neonguyen888/Canadian-Federal-Procurement-Audit-Analytics/blob/main/reports/report.md).
 
 ## 9. Publish
 
-Save to Tableau Public under a title that says what it is, for example "Federal procurement review: which contracts to check first". In the description, link the GitHub repository. Tableau Public shows your name under the viz, so the dashboard itself carries no author line.
+Save to Tableau Public under a title that says what it is, for example "Federal procurement review: which contracts to check first". In the description, link [the GitHub repository](https://github.com/neonguyen888/Canadian-Federal-Procurement-Audit-Analytics). Tableau Public shows your name under the viz, so the dashboard itself carries no author line.
 
 Before publishing, compare each card with `design/` and with `data/processed/results.json`. If a number differs, the filter or calculation is wrong, not the data.

@@ -59,7 +59,7 @@ All 12 charts are in the [full report](reports/report.md).
 
 ## Dashboard
 
-A three-page Tableau dashboard: an overview, the pile-up under the $40,000 limit, and the review queue. The design below is drawn from the project data; [`tableau/README.md`](tableau/README.md) is the guide for building it in Tableau Public.
+Design for a three-page Tableau Public dashboard: an overview, the pile-up under the $40,000 limit, and the review queue. [`tableau/mockup.py`](tableau/mockup.py) draws it from the project data, so it shows the real numbers, and [`tableau/README.md`](tableau/README.md) sets out each sheet's fields, filters and colours.
 
 ![Dashboard design, overview page](tableau/design/1_overview_dark.png)
 
@@ -112,7 +112,7 @@ sql/
   05_tableau_views.sql  one row per award, as the dashboard shows it
 tableau/           dashboard design (design/), the script that draws it, and the build guide (README.md)
 tests/             cleaning, vendor matching, contract assembly (on a test database), the five tests, bunching,
-                   case study, documents
+                   case study, settings, the Tableau files, documents
 data/raw/          the portal file (downloaded, not committed) and its data dictionary
 data/processed/    analysis outputs and results.json; the large cleaned tables are rebuilt, not committed
 data/tableau/      files for the dashboard; awards.csv (77 MB) is rebuilt, not committed
@@ -129,12 +129,6 @@ reports/           report.md and figures/
 - Call-ups against standing offers are left out of the splitting test.
 - Vendor spellings are merged by rule and then by fuzzy matching at 94 out of 100. In a hand check of 100 merged names, 95 were the same supplier.
 - Contracts of $10,000 or less are not published in this file and cannot be seen.
-
-## Next
-
-- Build the Tableau workbook from the design in `tableau/design/`, following `tableau/README.md`, and publish it on Tableau Public.
-- Add a second case from another Auditor General report, so the check in report section 10 rests on more than one audit.
-- Read the solicitation procedure from every row of a contract, not only the award row (4,217 contracts disagree).
 
 ## Licence
 
