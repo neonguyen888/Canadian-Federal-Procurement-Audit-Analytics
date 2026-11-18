@@ -2,9 +2,9 @@
 
 **Author:** Neo Nguyen · **Stack:** PostgreSQL · Python (pandas, rapidfuzz, matplotlib) · Tableau
 
-A federal department may award a service contract of up to $40,000 without asking for bids. In the last $5,000 up to that limit there are 18,990 awards where the values below it predict about 9,900.
+A Canadian federal department can give a service contract worth up to $40,000 to a supplier of its choice, without asking anyone else to bid. Above that, the work has to be competed. So the contracts sitting just under $40,000 are worth a look, and there are a lot of them: 18,990 in the last $5,000 before the limit, about twice the 9,900 that the values below would predict. Two thirds of them were sole-sourced.
 
-This project loads the government's [published contract data](https://open.canada.ca/data/en/dataset/d8f85d91-7dec-4fd1-8055-483b77225d8b) into PostgreSQL, runs five audit tests based on the [Government Contracts Regulations](https://laws-lois.justice.gc.ca/eng/regulations/SOR-87-402/section-6.html) over seven years of awards, and ranks the awards they flag, so that a review team with limited time knows which files to open first.
+The government publishes every contract over $10,000, about 60,000 a year, far more than an audit team can read. This project turns that list into a short one. It loads seven years of awards into PostgreSQL, runs five checks for the patterns auditors look for, such as one purchase split into several small contracts or a contract that doubles after it is signed, and ranks what they flag so a reviewer knows which files to open first.
 
 **[Read the full report with charts](reports/report.md)**
 
@@ -12,48 +12,48 @@ This project loads the government's [published contract data](https://open.canad
 
 ## Questions
 
-1. Which contract awards match a pattern worth a reviewer's time, and in what order should they be read?
-2. Do awards pile up just under the dollar limit that requires bids, beyond what round-number pricing would explain?
-3. Would the tests have pointed at contracts that an audit later examined?
+1. Which awards should a reviewer read first?
+2. Do awards pile up just under the limit that requires bids, more than round-number pricing would explain?
+3. Would these checks have pointed at the ArriveCAN contracts the Auditor General later examined?
 
 ## Results
 
-| Finding | Value |
+| What I found | Number |
 |---|---|
-| Awards analysed | 427,302 awards, 95 departments, 10 June 2019 to October 2026 |
-| Value | $156.1B at award, $192.3B after amendments |
-| Non-competitive share | 36.6% of awards; 34.2% in 2019-20 (from June), 39.1% in 2024-25 |
-| Flagged by at least one test | 64,948 awards (15.2%); 4,815 by two or more |
-| Service awards in the last $5,000 up to $40,000 | 1.92 times the trend (95% interval 1.84 to 1.99) |
-| Same, non-competitive awards only | 2.63 times; competitive awards 1.25 times |
-| Same calculation at $60K to $90K, where no rule changes | 0.89 to 1.21 times |
-| Non-competitive share just under and just over the limit | 66.8% under, 31.7% over |
-| Sole-sourced within the limit, then amended past it | 2,071 awards: $55.3M at award, $165.7M now |
-| Non-competitive awards with no s.6 exception recorded | 37% to 42% a year since 2022-23 (the field is optional) |
-| ArriveCAN contractors at CBSA, share of awards flagged | 36% against 17% for all other CBSA awards; like for like (services of $100K+), 34% against 35%; possible duplicates 17% against 4% |
+| Awards analysed | 427,302 from 95 departments, 10 June 2019 to October 2026 |
+| Their value | $156.1B when signed, $192.3B after amendments |
+| Given without competition | 36.6% of awards, up from 34.2% in 2019-20 (from June) to 39.1% in 2024-25 |
+| Flagged for review | 64,948 awards (15.2%), 4,815 of them by two or more checks |
+| Service awards in the last $5,000 before $40,000 | about twice the trend: 1.92x (95% interval 1.84x to 1.99x) |
+| The same, sole-sourced awards only | 2.63x the trend; competed awards 1.25x |
+| The same test at $60K to $90K, where no rule applies | 0.89x to 1.21x, which is what round numbers alone produce |
+| Sole-sourced share just under and just over $40,000 | 66.8% under, 31.7% over |
+| Signed within the limit, then amended past it | 2,071 awards: $55.3M when signed, $165.7M now |
+| No reason recorded for skipping competition | 37% to 42% of sole-sourced awards a year since 2022-23 (the field is optional) |
+| ArriveCAN contractors at CBSA, share flagged | 36% against 17% for CBSA's other awards; against similar contracts (services of $100K+), 34% against 35%; for same-value contracts issued days apart, 17% against 4% |
 
-**The five tests**
+**The five checks**
 
-| Test | Flags | Awards | Value at award |
+| Check | What it looks for | Awards | Value when signed |
 |---|---|---|---|
-| T1 Contract splitting | Non-competitive awards to one vendor within 30 days, each within the limit, together over it | 13,424 | $289.6M |
-| T2 Sole-source near the limit | Non-competitive award in the top 10% of the range that needs no bids | 20,231 | $682.9M |
-| T3 Amendment growth | Value now more than 50% above the award, or three or more amendments | 26,659 | $25.1B |
-| T4 Possible duplicate | Same department, vendor and value within 7 days | 9,597 | $1.0B |
-| T5 Vendor concentration | One vendor with over half of a department's non-competitive spending | 19 | $302.3M |
+| T1 Contract splitting | Several sole-source awards to one vendor within 30 days, each under the limit but over it together | 13,424 | $289.6M |
+| T2 Sole-source near the limit | A sole-source award in the top 10% below the limit ($36,000 to $40,000 for services) | 20,231 | $682.9M |
+| T3 Amendment growth | Worth more than 50% above the signed value now, or amended three or more times | 26,659 | $25.1B |
+| T4 Possible duplicate | Same department, vendor and amount within 7 days | 9,597 | $1.0B |
+| T5 Vendor concentration | One vendor holding over half of a department's sole-source spending | 19 | $302.3M |
 
-Every test is written twice, in SQL and in pandas, and a script compares the two award by award. They agree on all 17 comparisons. A flag marks an award for review. It is not a finding that anything was done wrong, and most flagged awards will have an ordinary explanation.
+Each check is written twice, once in SQL and once in pandas, and a script compares the two award by award; they agree on all 17 comparisons. A flag means a file is worth opening. Most flagged awards will have an ordinary explanation, and nothing here is a finding that anything was done wrong.
 
-The excess under the goods limit of $25,000 (1.40 times the trend) is real but reads differently: competitive goods awards show nearly the same excess as non-competitive ones, so the bid requirement cannot be the whole explanation (report section 5).
+Goods have a lower limit, $25,000, and a smaller pile-up under it (1.40x the trend). Competed goods awards pile up almost as much as sole-sourced ones there, though, so the bidding rule cannot be the whole reason (report section 5).
 
 ## Charts
 
 | | |
 |---|---|
 | ![Non-competitive share by value](reports/figures/04_non_competitive_share_by_value.png) | ![Real limits against placebo values](reports/figures/05_real_limits_vs_placebo.png) |
-| The share of awards made without competition, by contract value | The excess at the real limits against four round values where no rule changes |
+| Share of awards given without competition, by contract value | The pile-up at the real limits, against four round values where no rule applies |
 | ![Amendment growth](reports/figures/07_amendment_growth.png) | ![Case study](reports/figures/12_case_study.png) |
-| Value at award against value now, for every amended contract | Flag rates for the ArriveCAN contractors' awards, against all CBSA awards and like for like |
+| Value when signed against value now, for every amended contract | How often the ArriveCAN contractors' awards were flagged, against CBSA's other awards and similar contracts |
 
 All 12 charts are in the [full report](reports/report.md).
 
